@@ -16,6 +16,9 @@ namespace Lykke.Service.SwiftCredentials.Services
 
             builder.RegisterType<ShutdownManager>()
                 .As<IShutdownManager>();
+
+            builder.RegisterType<SwiftCredentialsService>()
+                .As<ISwiftCredentialsService>();
         }
     }
 }

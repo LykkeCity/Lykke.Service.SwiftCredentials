@@ -2,20 +2,22 @@
 using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
+using AutoMapper;
 using AzureStorage.Tables;
 using Common.Log;
 using Lykke.Common.ApiLibrary.Middleware;
 using Lykke.Common.ApiLibrary.Swagger;
 using Lykke.Logs;
 using Lykke.Service.SwiftCredentials.Core.Services;
+using Lykke.Service.SwiftCredentials.Middleware;
 using Lykke.Service.SwiftCredentials.Settings;
-using Lykke.Service.SwiftCredentials.Services;
 using Lykke.SettingsReader;
 using Lykke.SlackNotification.AzureQueue;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace Lykke.Service.SwiftCredentials
 {
@@ -49,8 +51,25 @@ namespace Lykke.Service.SwiftCredentials
 
                 services.AddSwaggerGen(options =>
                 {
-                    options.DefaultLykkeConfiguration("v1", "SwiftCredentials API");
+                    options.SwaggerDoc(
+                        "v1",
+                        new Info
+                        {
+                            Version = "v1",
+                            Title = "SwiftCredentials API"
+                        });
+
+                    options.DescribeAllEnumsAsStrings();
+                    options.EnableXmsEnumExtension();
+                    options.EnableXmlDocumentation();
                 });
+
+                Mapper.Initialize(m =>
+                {
+                    m.AddProfile<AzureRepositories.AutoMapperProfile>();
+                    m.AddProfile<AutoMapperProfile>();
+                });
+                Mapper.AssertConfigurationIsValid();
 
                 var builder = new ContainerBuilder();
                 var appSettings = Configuration.LoadSettings<AppSettings>();
@@ -60,7 +79,8 @@ namespace Lykke.Service.SwiftCredentials
                     .As<ILog>()
                     .SingleInstance();
 
-                builder.RegisterModule(new AutofacModule());
+                builder.RegisterModule(new Services.AutofacModule());
+                builder.RegisterModule(new AzureRepositories.AutofacModule(appSettings.Nested(x => x.SwiftCredentialsService.Db.DataConnectionString), Log));
                 builder.Populate(services);
                 ApplicationContainer = builder.Build();
 
@@ -83,6 +103,7 @@ namespace Lykke.Service.SwiftCredentials
                 }
 
                 app.UseLykkeMiddleware("SwiftCredentials", ex => new { Message = "Technical problem" });
+                app.UseMiddleware<ErrorHandlerMiddleware>("SwiftCredentials");
 
                 app.UseMvc();
                 app.UseSwagger(c =>
@@ -173,7 +194,7 @@ namespace Lykke.Service.SwiftCredentials
 
             aggregateLogger.AddLog(consoleLogger);
 
-            var dbLogConnectionStringManager = settings.Nested(x => x.SwiftCredentialsService.Db.LogsConnString);
+            var dbLogConnectionStringManager = settings.Nested(x => x.SwiftCredentialsService.Db.LogsConnectionString);
             var dbLogConnectionString = dbLogConnectionStringManager.CurrentValue;
 
             if (string.IsNullOrEmpty(dbLogConnectionString))
