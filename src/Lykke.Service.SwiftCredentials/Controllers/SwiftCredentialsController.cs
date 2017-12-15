@@ -39,6 +39,8 @@ namespace Lykke.Service.SwiftCredentials.Controllers
         /// <summary>
         /// Returns swift credentials by regulation and asset.
         /// </summary>
+        /// <param name="regulationId">The regulation id.</param>
+        /// <param name="assetId">The asset id.</param>
         /// <response code="200">The swift credentials.</response>
         /// <response code="404">The swift credentials not found.</response>
         [HttpGet]
@@ -58,6 +60,7 @@ namespace Lykke.Service.SwiftCredentials.Controllers
         /// <summary>
         /// Adds swift credentials.
         /// </summary>
+        /// <param name="model">The model that describe a swift credentials.</param>
         /// <response code="204">The swift credentials successfully added.</response>
         /// <response code="400">The swift credentials model is invalid.</response>
         /// <response code="409">The swift credentials already exists.</response>
@@ -81,6 +84,7 @@ namespace Lykke.Service.SwiftCredentials.Controllers
         /// <summary>
         /// Updates swift credentials.
         /// </summary>
+        /// <param name="model">The model that describe a swift credentials.</param>
         /// <response code="204">The swift credentials successfully updated.</response>
         /// <response code="400">The swift credentials model is invalid.</response>
         /// <response code="404">The swift credentials not found.</response>

@@ -1,28 +1,22 @@
 ﻿using System;
 using Autofac;
-using Common.Log;
 
 namespace Lykke.Service.SwiftCredentials.Client
 {
     public static class AutofacExtension
     {
-        public static void RegisterSwiftCredentialsClient(this ContainerBuilder builder, string serviceUrl, ILog log)
+        public static void RegisterSwiftCredentialsClient(this ContainerBuilder builder, SwiftCredentialsServiceClientSettings settings)
         {
             if (builder == null) throw new ArgumentNullException(nameof(builder));
-            if (serviceUrl == null) throw new ArgumentNullException(nameof(serviceUrl));
-            if (log == null) throw new ArgumentNullException(nameof(log));
-            if (string.IsNullOrWhiteSpace(serviceUrl))
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(serviceUrl));
+            if (settings == null) throw new ArgumentNullException(nameof(settings));
+
+            if (string.IsNullOrWhiteSpace(settings.ServiceUrl))
+                throw new ArgumentException("Value cannot be null or whitespace.", nameof(settings.ServiceUrl));
 
             builder.RegisterType<SwiftCredentialsClient>()
-                .WithParameter("serviceUrl", serviceUrl)
+                .WithParameter(TypedParameter.From(settings))
                 .As<ISwiftCredentialsClient>()
                 .SingleInstance();
-        }
-
-        public static void RegisterSwiftCredentialsClient(this ContainerBuilder builder, SwiftCredentialsServiceClientSettings settings, ILog log)
-        {
-            builder.RegisterSwiftCredentialsClient(settings?.ServiceUrl, log);
         }
     }
 }
