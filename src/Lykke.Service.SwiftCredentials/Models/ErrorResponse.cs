@@ -8,7 +8,7 @@ namespace Lykke.Service.SwiftCredentials.Models
 {
     public class ErrorResponse
     {
-        public string ErrorMessage { get; }
+        public string ErrorMessage { get; private set; }
 
         public Dictionary<string, List<string>> ModelErrors { get; }
 
@@ -55,6 +55,13 @@ namespace Lykke.Service.SwiftCredentials.Models
 
                 sb.Append(" -> ");
             }
+        }
+
+        public static ErrorResponse Create(string message, ModelStateDictionary modelState)
+        {
+            ErrorResponse response = Create(modelState);
+            response.ErrorMessage = message;
+            return response;
         }
 
         public static ErrorResponse Create()

@@ -2,6 +2,7 @@
 {
     public class DbSettings
     {
-        public string LogsConnString { get; set; }
+        public string DataConnectionString { get; set; }
+        public string LogsConnectionString { get; set; }
     }
 }
