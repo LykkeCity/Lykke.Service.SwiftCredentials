@@ -2,9 +2,9 @@
 {
     public interface ISwiftCredentials
     {
-        string RegulationId { get; set; }
+        string RegulatorId { get; set; }
         string AssetId { get; set; }
-        string Bic { get; set; }
+        string BIC { get; set; }
         string AccountNumber { get; set; }
         string AccountName { get; set; }
         string PurposeOfPayment { get; set; }

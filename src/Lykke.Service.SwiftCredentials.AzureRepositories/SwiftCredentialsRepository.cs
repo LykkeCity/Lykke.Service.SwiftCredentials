@@ -33,7 +33,7 @@ namespace Lykke.Service.SwiftCredentials.AzureRepositories
         {
             var entity = new SwiftCredentialsEntity
             {
-                PartitionKey = GetPartitionKey(swiftCredentials.RegulationId),
+                PartitionKey = GetPartitionKey(swiftCredentials.RegulatorId),
                 RowKey = GetRowKey(swiftCredentials.AssetId)
             };
 
@@ -51,7 +51,7 @@ namespace Lykke.Service.SwiftCredentials.AzureRepositories
                 {
                     throw new SwiftCredentialsAlreadyExistsException("Already exists", exception)
                     {
-                        RegulationId = swiftCredentials.RegulationId,
+                        RegulationId = swiftCredentials.RegulatorId,
                         AssetId = swiftCredentials.AssetId
                     };
                 }
@@ -61,7 +61,7 @@ namespace Lykke.Service.SwiftCredentials.AzureRepositories
         public async Task<bool> UpdateAsync(ISwiftCredentials swiftCredentials)
         {
             SwiftCredentialsEntity swiftCredentialsEntity = await _storage.MergeAsync(
-                GetPartitionKey(swiftCredentials.RegulationId),
+                GetPartitionKey(swiftCredentials.RegulatorId),
                 GetRowKey(swiftCredentials.AssetId),
                 entity =>
                 {
@@ -78,9 +78,9 @@ namespace Lykke.Service.SwiftCredentials.AzureRepositories
         }
 
         private static string GetPartitionKey(string regulationId)
-            => regulationId.ToLower().Trim();
+            => regulationId.Trim();
 
         private static string GetRowKey(string assetId)
-            => assetId.Trim().ToLower();
+            => assetId.Trim();
     }
 }

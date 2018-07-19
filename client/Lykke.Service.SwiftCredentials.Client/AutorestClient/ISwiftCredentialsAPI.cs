@@ -60,6 +60,7 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
         /// Updates swift credentials.
         /// </summary>
         /// <param name='model'>
+        /// The model that describe a swift credentials.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -73,6 +74,7 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
         /// Adds swift credentials.
         /// </summary>
         /// <param name='model'>
+        /// The model that describe a swift credentials.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.
@@ -86,8 +88,10 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
         /// Returns swift credentials by regulation and asset.
         /// </summary>
         /// <param name='regulationId'>
+        /// The regulation id.
         /// </param>
         /// <param name='assetId'>
+        /// The asset id.
         /// </param>
         /// <param name='customHeaders'>
         /// The headers that will be added to request.

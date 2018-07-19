@@ -5,7 +5,7 @@ namespace Lykke.Service.SwiftCredentials.Models
     public class SwiftCredentialsModel
     {
         [Required]
-        public string RegulationId { get; set; }
+        public string RegulatorId { get; set; }
         [Required]
         public string AssetId { get; set; }
         public string Bic { get; set; }

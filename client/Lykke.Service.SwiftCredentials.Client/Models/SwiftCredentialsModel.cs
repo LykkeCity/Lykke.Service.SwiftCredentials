@@ -2,7 +2,7 @@
 {
     public class SwiftCredentialsModel
     {
-        public string RegulationId { get; set; }
+        public string RegulatorId { get; set; }
         public string AssetId { get; set; }
         public string Bic { get; set; }
         public string AccountNumber { get; set; }

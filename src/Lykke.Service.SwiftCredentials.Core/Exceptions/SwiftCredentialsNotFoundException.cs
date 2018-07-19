@@ -48,7 +48,7 @@ namespace Lykke.Service.SwiftCredentials.Core.Exceptions
         /// <summary>
         /// Gets or sets the regulation id.
         /// </summary>
-        public string RegulationId { get; set; }
+        public string RegulatorId { get; set; }
 
         /// <summary>
         /// Gets or sets the asset id.
