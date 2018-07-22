@@ -113,7 +113,7 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
         /// </summary>
         private void Initialize()
         {
-            BaseUri = new System.Uri("http://localhost:5000");
+            BaseUri = new System.Uri("http://localhost:5000/");
             SerializationSettings = new JsonSerializerSettings
             {
                 Formatting = Newtonsoft.Json.Formatting.Indented,
@@ -403,6 +403,7 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
         /// Updates swift credentials.
         /// </summary>
         /// <param name='model'>
+        /// The model that describe a swift credentials.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -554,6 +555,7 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
         /// Adds swift credentials.
         /// </summary>
         /// <param name='model'>
+        /// The model that describe a swift credentials.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.
@@ -705,8 +707,10 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
         /// Returns swift credentials by regulation and asset.
         /// </summary>
         /// <param name='regulationId'>
+        /// The regulation id.
         /// </param>
         /// <param name='assetId'>
+        /// The asset id.
         /// </param>
         /// <param name='customHeaders'>
         /// Headers that will be added to request.

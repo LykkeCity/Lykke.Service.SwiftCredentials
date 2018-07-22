@@ -6,7 +6,7 @@
         {
             return new Models.SwiftCredentialsModel
             {
-                RegulationId= model.RegulationId,
+                RegulatorId= model.RegulatorId,
                 AssetId = model.AssetId,
                 Bic = model.Bic,
                 AccountNumber = model.AccountNumber,
@@ -22,7 +22,7 @@
         {
             return new AutorestClient.Models.SwiftCredentialsModel
             {
-                RegulationId = model.RegulationId,
+                RegulatorId = model.RegulatorId,
                 AssetId = model.AssetId,
                 Bic = model.Bic,
                 AccountNumber = model.AccountNumber,

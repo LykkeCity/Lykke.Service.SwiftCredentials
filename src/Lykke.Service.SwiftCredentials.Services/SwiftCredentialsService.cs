@@ -29,7 +29,7 @@ namespace Lykke.Service.SwiftCredentials.Services
             {
                 throw new SwiftCredentialsNotFoundException("Swift credentials not found")
                 {
-                    RegulationId = regulationId,
+                    RegulatorId = regulationId,
                     AssetId = assetId
                 };
             }
@@ -50,7 +50,7 @@ namespace Lykke.Service.SwiftCredentials.Services
             {
                 throw new SwiftCredentialsNotFoundException("Swift credentials not found")
                 {
-                    RegulationId = swiftCredentials.RegulationId,
+                    RegulatorId = swiftCredentials.RegulatorId,
                     AssetId = swiftCredentials.AssetId
                 };
             }

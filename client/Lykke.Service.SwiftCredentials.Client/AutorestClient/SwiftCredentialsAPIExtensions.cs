@@ -80,6 +80,7 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
             /// The operations group for this extension method.
             /// </param>
             /// <param name='model'>
+            /// The model that describe a swift credentials.
             /// </param>
             public static ErrorResponse SwiftCredentialsUpdate(this ISwiftCredentialsAPI operations, SwiftCredentialsModel model = default(SwiftCredentialsModel))
             {
@@ -93,6 +94,7 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
             /// The operations group for this extension method.
             /// </param>
             /// <param name='model'>
+            /// The model that describe a swift credentials.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -112,6 +114,7 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
             /// The operations group for this extension method.
             /// </param>
             /// <param name='model'>
+            /// The model that describe a swift credentials.
             /// </param>
             public static ErrorResponse SwiftCredentialsAdd(this ISwiftCredentialsAPI operations, SwiftCredentialsModel model = default(SwiftCredentialsModel))
             {
@@ -125,6 +128,7 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
             /// The operations group for this extension method.
             /// </param>
             /// <param name='model'>
+            /// The model that describe a swift credentials.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.
@@ -144,8 +148,10 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
             /// The operations group for this extension method.
             /// </param>
             /// <param name='regulationId'>
+            /// The regulation id.
             /// </param>
             /// <param name='assetId'>
+            /// The asset id.
             /// </param>
             public static object SwiftCredentialsGet(this ISwiftCredentialsAPI operations, string regulationId, string assetId)
             {
@@ -159,8 +165,10 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
             /// The operations group for this extension method.
             /// </param>
             /// <param name='regulationId'>
+            /// The regulation id.
             /// </param>
             /// <param name='assetId'>
+            /// The asset id.
             /// </param>
             /// <param name='cancellationToken'>
             /// The cancellation token.

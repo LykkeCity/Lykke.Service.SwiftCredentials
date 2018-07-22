@@ -23,9 +23,9 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient.Models
         /// <summary>
         /// Initializes a new instance of the SwiftCredentialsModel class.
         /// </summary>
-        public SwiftCredentialsModel(string regulationId, string assetId, string bic = default(string), string accountNumber = default(string), string accountName = default(string), string purposeOfPayment = default(string), string bankAddress = default(string), string companyAddress = default(string), string correspondentAccount = default(string))
+        public SwiftCredentialsModel(string regulatorId, string assetId, string bic = default(string), string accountNumber = default(string), string accountName = default(string), string purposeOfPayment = default(string), string bankAddress = default(string), string companyAddress = default(string), string correspondentAccount = default(string))
         {
-            RegulationId = regulationId;
+            RegulatorId = regulatorId;
             AssetId = assetId;
             Bic = bic;
             AccountNumber = accountNumber;
@@ -44,8 +44,8 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient.Models
 
         /// <summary>
         /// </summary>
-        [JsonProperty(PropertyName = "RegulationId")]
-        public string RegulationId { get; set; }
+        [JsonProperty(PropertyName = "RegulatorId")]
+        public string RegulatorId { get; set; }
 
         /// <summary>
         /// </summary>
@@ -95,9 +95,9 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient.Models
         /// </exception>
         public virtual void Validate()
         {
-            if (RegulationId == null)
+            if (RegulatorId == null)
             {
-                throw new ValidationException(ValidationRules.CannotBeNull, "RegulationId");
+                throw new ValidationException(ValidationRules.CannotBeNull, "RegulatorId");
             }
             if (AssetId == null)
             {
