@@ -1,11 +1,13 @@
 ﻿using System;
 using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Common.Log;
 using Lykke.Service.Assets.Client;
 using Lykke.Service.PersonalData;
 using Lykke.Service.PersonalData.Client;
 using Lykke.Service.PersonalData.Contract;
 using Lykke.Service.SwiftCredentials.Settings;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Lykke.Service.SwiftCredentials
 {
@@ -13,6 +15,7 @@ namespace Lykke.Service.SwiftCredentials
     {
         private readonly ILog _log;
         private readonly AppSettings _settings;
+        private readonly ServiceCollection _services;
         
         public ClientsModule(
             AppSettings settings,
@@ -20,18 +23,23 @@ namespace Lykke.Service.SwiftCredentials
         {
             _log = log;
             _settings = settings;
+            
+            _services = new ServiceCollection();
         }
 
         protected override void Load(ContainerBuilder builder)
         {
-            builder.RegisterAssetsClient(
+            _services.RegisterAssetsClient(
                 AssetServiceSettings.Create(
                     new Uri(_settings.AssetsServiceClient.ServiceUrl),
-                    TimeSpan.FromMinutes(5)));
+                    TimeSpan.FromMinutes(5)),
+                    _log);
             
             builder.RegisterType<PersonalDataService>()
                 .As<IPersonalDataService>()
                 .WithParameter(TypedParameter.From(_settings.PersonalDataServiceClient));
+            
+            builder.Populate(_services);
         }
     }
 }

@@ -14,16 +14,20 @@ namespace Lykke.Service.SwiftCredentials.Controllers
     [Route("api/[controller]")]
     public class EmailRequestController : Controller
     {
-        private readonly IEventPublisher _eventPublisher;
+        private readonly ICqrsEngine _cqrsEngine;
         private readonly IPersonalDataService _personalDataService;
         private readonly IAssetsServiceWithCache _assetsService;
         private readonly ISwiftCredentialsService _swiftCredentialsService;
         
         public EmailRequestController(
-            IEventPublisher eventPublisher,
+            ICqrsEngine cqrsEngine,
+            IPersonalDataService personalDataService,
+            IAssetsServiceWithCache assetsServiceWithCache,
             ISwiftCredentialsService swiftCredentialsService)
         {
-            _eventPublisher = eventPublisher;
+            _cqrsEngine = cqrsEngine;
+            _personalDataService = personalDataService;
+            _assetsService = assetsServiceWithCache;
             _swiftCredentialsService = swiftCredentialsService;
         }
         
@@ -36,7 +40,7 @@ namespace Lykke.Service.SwiftCredentials.Controllers
 
             var asset = await _assetsService.TryGetAssetAsync(cmd.AssetId);
             
-            _eventPublisher.PublishEvent(new SwiftCredentialsRequestedEvent
+            _cqrsEngine.PublishEvent(new SwiftCredentialsRequestedEvent
             {
                 ClientName = pd.FullName,
                 Amount = cmd.Amount,
@@ -51,7 +55,7 @@ namespace Lykke.Service.SwiftCredentials.Controllers
                 CorrespondentAccount = swiftCredentials.CorrespondentAccount,
                 PurposeOfPaymentTemplate = swiftCredentials.PurposeOfPayment,
                 RegulatorId = swiftCredentials.RegulatorId
-            });
+            }, SwiftCredentialsBoundedContext.Name);
 
             return Ok();
         }
