@@ -4,6 +4,7 @@
     {
         public string ClientId { set; get; }
         public string RegulationId { set; get; }
+        public double Amount { set; get; }
         public string AssetId { set; get; }
     }
 }
