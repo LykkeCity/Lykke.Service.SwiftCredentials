@@ -47,5 +47,14 @@ namespace Lykke.Service.SwiftCredentials.Client
         /// <param name="regulationId">The regulation id.</param>
         /// <param name="assetId">The asset id.</param>
         Task DeleteAsync(string regulationId, string assetId);
+        
+        /// <summary>
+        /// Requests email with swift credentials.
+        /// </summary>
+        /// <param name="clientId">The client id.</param>
+        /// <param name="regulationId">The regulation id.</param>
+        /// <param name="assetId">The asset id.</param>
+        /// <param name="amount">Amount.</param>
+        Task EmailRequest(string clientId, string regulationId, string assetId, double amount);
     }
 }

@@ -17,6 +17,41 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
     /// </summary>
     public static partial class SwiftCredentialsAPIExtensions
     {
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='amount'>
+            /// </param>
+            /// <param name='clientId'>
+            /// </param>
+            /// <param name='regulationId'>
+            /// </param>
+            /// <param name='assetId'>
+            /// </param>
+            public static void ApiEmailRequestPost(this ISwiftCredentialsAPI operations, double amount, string clientId = default(string), string regulationId = default(string), string assetId = default(string))
+            {
+                operations.ApiEmailRequestPostAsync(amount, clientId, regulationId, assetId).GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='amount'>
+            /// </param>
+            /// <param name='clientId'>
+            /// </param>
+            /// <param name='regulationId'>
+            /// </param>
+            /// <param name='assetId'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task ApiEmailRequestPostAsync(this ISwiftCredentialsAPI operations, double amount, string clientId = default(string), string regulationId = default(string), string assetId = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            {
+                (await operations.ApiEmailRequestPostWithHttpMessagesAsync(amount, clientId, regulationId, assetId, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
             /// <summary>
             /// Checks service is alive
             /// </summary>
