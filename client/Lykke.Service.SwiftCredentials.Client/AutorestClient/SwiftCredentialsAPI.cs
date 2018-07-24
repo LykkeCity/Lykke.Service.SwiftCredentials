@@ -145,6 +145,8 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
         /// </param>
         /// <param name='clientId'>
         /// </param>
+        /// <param name='partnerId'>
+        /// </param>
         /// <param name='regulationId'>
         /// </param>
         /// <param name='assetId'>
@@ -161,7 +163,7 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<HttpOperationResponse> ApiEmailRequestPostWithHttpMessagesAsync(double amount, string clientId = default(string), string regulationId = default(string), string assetId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<HttpOperationResponse> ApiEmailRequestPostWithHttpMessagesAsync(double amount, string clientId = default(string), string partnerId = default(string), string regulationId = default(string), string assetId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Tracing
             bool _shouldTrace = ServiceClientTracing.IsEnabled;
@@ -171,6 +173,7 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
                 _invocationId = ServiceClientTracing.NextInvocationId.ToString();
                 Dictionary<string, object> tracingParameters = new Dictionary<string, object>();
                 tracingParameters.Add("clientId", clientId);
+                tracingParameters.Add("partnerId", partnerId);
                 tracingParameters.Add("regulationId", regulationId);
                 tracingParameters.Add("amount", amount);
                 tracingParameters.Add("assetId", assetId);
@@ -184,6 +187,10 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
             if (clientId != null)
             {
                 _queryParameters.Add(string.Format("ClientId={0}", System.Uri.EscapeDataString(clientId)));
+            }
+            if (partnerId != null)
+            {
+                _queryParameters.Add(string.Format("PartnerId={0}", System.Uri.EscapeDataString(partnerId)));
             }
             if (regulationId != null)
             {

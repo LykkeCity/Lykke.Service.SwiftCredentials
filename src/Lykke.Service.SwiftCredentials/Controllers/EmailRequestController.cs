@@ -42,6 +42,8 @@ namespace Lykke.Service.SwiftCredentials.Controllers
             
             _cqrsEngine.PublishEvent(new SwiftCredentialsRequestedEvent
             {
+                Email = pd.Email,
+                PartnerId = cmd.PartnerId,
                 ClientName = pd.FullName,
                 Amount = cmd.Amount,
                 Year = DateTime.UtcNow.Year.ToString(),

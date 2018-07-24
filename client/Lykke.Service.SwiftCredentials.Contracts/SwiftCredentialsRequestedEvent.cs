@@ -5,6 +5,8 @@ namespace Lykke.Service.SwiftCredentials.Contracts
     [MessagePackObject(true)]
     public class SwiftCredentialsRequestedEvent
     {
+        public string Email { set; get; }
+        public string PartnerId { set; get; }
         public string RegulatorId { get; set; }
         public string AssetId { get; set; }
         public string ClientName { get; set; }
