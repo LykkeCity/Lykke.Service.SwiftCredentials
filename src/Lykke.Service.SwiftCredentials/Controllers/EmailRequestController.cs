@@ -40,10 +40,20 @@ namespace Lykke.Service.SwiftCredentials.Controllers
 
             var asset = await _assetsService.TryGetAssetAsync(cmd.AssetId);
             
+            var assetTitle = asset.DisplayId ?? cmd.AssetId;
+
+            var clientIdentity = pd.Email != null ? pd.Email.Replace("@", ".") : "{1}";
+            var purposeOfPayment = string.Format(swiftCredentials.PurposeOfPayment, assetTitle, clientIdentity);
+
+            if (!purposeOfPayment.Contains(cmd.AssetId) && !purposeOfPayment.Contains(assetTitle))
+                purposeOfPayment += assetTitle;
+
+            if (!purposeOfPayment.Contains(clientIdentity))
+                purposeOfPayment += clientIdentity;
+            
             _cqrsEngine.PublishEvent(new SwiftCredentialsRequestedEvent
             {
                 Email = pd.Email,
-                PartnerId = cmd.PartnerId,
                 ClientName = pd.FullName,
                 Amount = cmd.Amount,
                 Year = DateTime.UtcNow.Year.ToString(),
@@ -55,7 +65,7 @@ namespace Lykke.Service.SwiftCredentials.Controllers
                 Bic = swiftCredentials.BIC,
                 CompanyAddress = swiftCredentials.CompanyAddress,
                 CorrespondentAccount = swiftCredentials.CorrespondentAccount,
-                PurposeOfPaymentTemplate = swiftCredentials.PurposeOfPayment,
+                PurposeOfPayment = purposeOfPayment,
                 RegulatorId = swiftCredentials.RegulatorId
             }, SwiftCredentialsBoundedContext.Name);
 
