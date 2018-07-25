@@ -18,17 +18,20 @@ namespace Lykke.Service.SwiftCredentials.Controllers
         private readonly IPersonalDataService _personalDataService;
         private readonly IAssetsServiceWithCache _assetsService;
         private readonly ISwiftCredentialsService _swiftCredentialsService;
+        private readonly IPurposeOfPaymentBuilder _purposeOfPaymentBuilder;
         
         public EmailRequestController(
             ICqrsEngine cqrsEngine,
             IPersonalDataService personalDataService,
             IAssetsServiceWithCache assetsServiceWithCache,
-            ISwiftCredentialsService swiftCredentialsService)
+            ISwiftCredentialsService swiftCredentialsService,
+            IPurposeOfPaymentBuilder purposeOfPaymentBuilder)
         {
             _cqrsEngine = cqrsEngine;
             _personalDataService = personalDataService;
             _assetsService = assetsServiceWithCache;
             _swiftCredentialsService = swiftCredentialsService;
+            _purposeOfPaymentBuilder = purposeOfPaymentBuilder;
         }
         
         [HttpPost]
@@ -39,17 +42,6 @@ namespace Lykke.Service.SwiftCredentials.Controllers
             var pd = await _personalDataService.GetAsync(cmd.ClientId);
 
             var asset = await _assetsService.TryGetAssetAsync(cmd.AssetId);
-            
-            var assetTitle = asset.DisplayId ?? cmd.AssetId;
-
-            var clientIdentity = pd.Email != null ? pd.Email.Replace("@", ".") : "{1}";
-            var purposeOfPayment = string.Format(swiftCredentials.PurposeOfPayment, assetTitle, clientIdentity);
-
-            if (!purposeOfPayment.Contains(cmd.AssetId) && !purposeOfPayment.Contains(assetTitle))
-                purposeOfPayment += assetTitle;
-
-            if (!purposeOfPayment.Contains(clientIdentity))
-                purposeOfPayment += clientIdentity;
             
             _cqrsEngine.PublishEvent(new SwiftCredentialsRequestedEvent
             {
@@ -65,7 +57,10 @@ namespace Lykke.Service.SwiftCredentials.Controllers
                 Bic = swiftCredentials.BIC,
                 CompanyAddress = swiftCredentials.CompanyAddress,
                 CorrespondentAccount = swiftCredentials.CorrespondentAccount,
-                PurposeOfPayment = purposeOfPayment,
+                PurposeOfPayment = await _purposeOfPaymentBuilder.Build(
+                    swiftCredentials.PurposeOfPayment,
+                    cmd.ClientId,
+                    cmd.AssetId),
                 RegulatorId = swiftCredentials.RegulatorId
             }, SwiftCredentialsBoundedContext.Name);
 

@@ -38,8 +38,6 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
         /// </param>
         /// <param name='clientId'>
         /// </param>
-        /// <param name='partnerId'>
-        /// </param>
         /// <param name='regulationId'>
         /// </param>
         /// <param name='assetId'>
@@ -50,7 +48,7 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ApiEmailRequestPostWithHttpMessagesAsync(double amount, string clientId = default(string), string partnerId = default(string), string regulationId = default(string), string assetId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ApiEmailRequestPostWithHttpMessagesAsync(double amount, string clientId = default(string), string regulationId = default(string), string assetId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Checks service is alive
@@ -135,6 +133,20 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
         /// The cancellation token.
         /// </param>
         Task<HttpOperationResponse> SwiftCredentialsDeleteWithHttpMessagesAsync(string regulationId, string assetId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+
+        /// <param name='clientId'>
+        /// </param>
+        /// <param name='regulationId'>
+        /// </param>
+        /// <param name='assetId'>
+        /// </param>
+        /// <param name='customHeaders'>
+        /// The headers that will be added to request.
+        /// </param>
+        /// <param name='cancellationToken'>
+        /// The cancellation token.
+        /// </param>
+        Task<HttpOperationResponse<object>> SwiftCredentialsForClientGetWithHttpMessagesAsync(string clientId, string regulationId, string assetId, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
     }
 }

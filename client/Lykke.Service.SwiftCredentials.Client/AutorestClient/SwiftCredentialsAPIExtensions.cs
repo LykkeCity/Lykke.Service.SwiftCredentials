@@ -24,15 +24,13 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
             /// </param>
             /// <param name='clientId'>
             /// </param>
-            /// <param name='partnerId'>
-            /// </param>
             /// <param name='regulationId'>
             /// </param>
             /// <param name='assetId'>
             /// </param>
-            public static void ApiEmailRequestPost(this ISwiftCredentialsAPI operations, double amount, string clientId = default(string), string partnerId = default(string), string regulationId = default(string), string assetId = default(string))
+            public static void ApiEmailRequestPost(this ISwiftCredentialsAPI operations, double amount, string clientId = default(string), string regulationId = default(string), string assetId = default(string))
             {
-                operations.ApiEmailRequestPostAsync(amount, clientId, partnerId, regulationId, assetId).GetAwaiter().GetResult();
+                operations.ApiEmailRequestPostAsync(amount, clientId, regulationId, assetId).GetAwaiter().GetResult();
             }
 
             /// <param name='operations'>
@@ -42,8 +40,6 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
             /// </param>
             /// <param name='clientId'>
             /// </param>
-            /// <param name='partnerId'>
-            /// </param>
             /// <param name='regulationId'>
             /// </param>
             /// <param name='assetId'>
@@ -51,9 +47,9 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ApiEmailRequestPostAsync(this ISwiftCredentialsAPI operations, double amount, string clientId = default(string), string partnerId = default(string), string regulationId = default(string), string assetId = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task ApiEmailRequestPostAsync(this ISwiftCredentialsAPI operations, double amount, string clientId = default(string), string regulationId = default(string), string assetId = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
-                (await operations.ApiEmailRequestPostWithHttpMessagesAsync(amount, clientId, partnerId, regulationId, assetId, null, cancellationToken).ConfigureAwait(false)).Dispose();
+                (await operations.ApiEmailRequestPostWithHttpMessagesAsync(amount, clientId, regulationId, assetId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
 
             /// <summary>
@@ -255,6 +251,40 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
             public static async Task SwiftCredentialsDeleteAsync(this ISwiftCredentialsAPI operations, string regulationId, string assetId, CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.SwiftCredentialsDeleteWithHttpMessagesAsync(regulationId, assetId, null, cancellationToken).ConfigureAwait(false)).Dispose();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='clientId'>
+            /// </param>
+            /// <param name='regulationId'>
+            /// </param>
+            /// <param name='assetId'>
+            /// </param>
+            public static object SwiftCredentialsForClientGet(this ISwiftCredentialsAPI operations, string clientId, string regulationId, string assetId)
+            {
+                return operations.SwiftCredentialsForClientGetAsync(clientId, regulationId, assetId).GetAwaiter().GetResult();
+            }
+
+            /// <param name='operations'>
+            /// The operations group for this extension method.
+            /// </param>
+            /// <param name='clientId'>
+            /// </param>
+            /// <param name='regulationId'>
+            /// </param>
+            /// <param name='assetId'>
+            /// </param>
+            /// <param name='cancellationToken'>
+            /// The cancellation token.
+            /// </param>
+            public static async Task<object> SwiftCredentialsForClientGetAsync(this ISwiftCredentialsAPI operations, string clientId, string regulationId, string assetId, CancellationToken cancellationToken = default(CancellationToken))
+            {
+                using (var _result = await operations.SwiftCredentialsForClientGetWithHttpMessagesAsync(clientId, regulationId, assetId, null, cancellationToken).ConfigureAwait(false))
+                {
+                    return _result.Body;
+                }
             }
 
     }

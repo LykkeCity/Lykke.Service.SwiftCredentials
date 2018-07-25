@@ -19,6 +19,9 @@ namespace Lykke.Service.SwiftCredentials.Services
 
             builder.RegisterType<SwiftCredentialsService>()
                 .As<ISwiftCredentialsService>();
+
+            builder.RegisterType<PurposeOfPaymentBuilder>()
+                .As<IPurposeOfPaymentBuilder>();
         }
     }
 }

@@ -106,6 +106,28 @@ namespace Lykke.Service.SwiftCredentials.Client
         {
             await _service.ApiEmailRequestPostAsync(amount, clientId, regulationId, assetId);
         }
+        
+        /// <summary>
+        /// Returns formatted swift credentials by client, regulation and asset.
+        /// </summary>
+        /// <param name="clientId">The client id.</param>
+        /// <param name="regulationId">The regulation id.</param>
+        /// <param name="assetId">The asset id.</param>
+        /// <returns>The <see cref="SwiftCredentialsModel"/>.</returns>
+        /// <exception cref="ErrorResponseException">Thrown if an error response received from service.</exception>
+        /// <exception cref="InvalidOperationException">Thrown if an unexpected response received.</exception>
+        public async Task<SwiftCredentialsModel> GetForClientAsync(string clientId ,string regulationId, string assetId)
+        {
+            object result = await _service.SwiftCredentialsForClientGetAsync(clientId, regulationId, assetId);
+
+            if (result is AutorestClient.Models.SwiftCredentialsModel regulationModel)
+                return regulationModel.Map();
+
+            if (result is AutorestClient.Models.ErrorResponse errorResponse)
+                throw new ErrorResponseException(errorResponse.ErrorMessage);
+
+            throw new InvalidOperationException($"Unexpected response type: {result?.GetType()}");
+        }
 
         /// <summary>
         /// Releases resources.
