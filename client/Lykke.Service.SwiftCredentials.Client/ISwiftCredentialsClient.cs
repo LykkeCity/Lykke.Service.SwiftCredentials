@@ -56,5 +56,16 @@ namespace Lykke.Service.SwiftCredentials.Client
         /// <param name="assetId">The asset id.</param>
         /// <param name="amount">Amount.</param>
         Task EmailRequest(string clientId, string regulationId, string assetId, double amount);
+
+        /// <summary>
+        /// Returns formatted swift credentials by client, regulation and asset.
+        /// </summary>
+        /// <param name="clientId">The client id.</param>
+        /// <param name="regulationId">The regulation id.</param>
+        /// <param name="assetId">The asset id.</param>
+        /// <returns>The <see cref="SwiftCredentialsModel"/>.</returns>
+        /// <exception cref="ErrorResponseException">Thrown if an error response received from service.</exception>
+        /// <exception cref="InvalidOperationException">Thrown if an unexpected response received.</exception>
+        Task<SwiftCredentialsModel> GetForClientAsync(string clientId, string regulationId, string assetId);
     }
 }
