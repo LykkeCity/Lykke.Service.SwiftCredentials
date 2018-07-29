@@ -48,7 +48,7 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        Task<HttpOperationResponse> ApiEmailRequestPostWithHttpMessagesAsync(double amount, string clientId = default(string), string regulationId = default(string), string assetId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
+        Task<HttpOperationResponse> ApiEmailRequestPostWithHttpMessagesAsync(decimal amount, string clientId = default(string), string regulationId = default(string), string assetId = default(string), Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken));
 
         /// <summary>
         /// Checks service is alive

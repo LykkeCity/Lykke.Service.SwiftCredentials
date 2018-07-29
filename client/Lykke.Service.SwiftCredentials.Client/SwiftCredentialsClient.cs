@@ -102,7 +102,7 @@ namespace Lykke.Service.SwiftCredentials.Client
         /// <param name="regulationId">The regulation id.</param>
         /// <param name="assetId">The asset id.</param>
         /// <param name="amount">Amount.</param>
-        public async Task EmailRequest(string clientId, string regulationId, string assetId, double amount)
+        public async Task EmailRequestAsync(string clientId, string regulationId, string assetId, decimal amount)
         {
             await _service.ApiEmailRequestPostAsync(amount, clientId, regulationId, assetId);
         }

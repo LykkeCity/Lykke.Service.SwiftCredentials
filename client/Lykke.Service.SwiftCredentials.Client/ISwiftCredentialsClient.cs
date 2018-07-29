@@ -55,7 +55,7 @@ namespace Lykke.Service.SwiftCredentials.Client
         /// <param name="regulationId">The regulation id.</param>
         /// <param name="assetId">The asset id.</param>
         /// <param name="amount">Amount.</param>
-        Task EmailRequest(string clientId, string regulationId, string assetId, double amount);
+        Task EmailRequestAsync(string clientId, string regulationId, string assetId, decimal amount);
 
         /// <summary>
         /// Returns formatted swift credentials by client, regulation and asset.

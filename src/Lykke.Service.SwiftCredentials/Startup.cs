@@ -59,6 +59,18 @@ namespace Lykke.Service.SwiftCredentials
                             Version = "v1",
                             Title = "SwiftCredentials API"
                         });
+                    
+                    options.MapType<decimal>(() => new Schema
+                    {
+                        Type = "number",
+                        Format = "decimal"
+                    });
+                    
+                    options.MapType<decimal?>(() => new Schema
+                    {
+                        Type = "number",
+                        Format = "decimal"
+                    });
 
                     options.DescribeAllEnumsAsStrings();
                     options.EnableXmsEnumExtension();
