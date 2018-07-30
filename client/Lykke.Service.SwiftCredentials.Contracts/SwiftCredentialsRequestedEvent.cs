@@ -10,7 +10,7 @@ namespace Lykke.Service.SwiftCredentials.Contracts
         public string AssetId { get; set; }
         public string AssetSymbol { get; set; }
         public string ClientName { get; set; }
-        public double Amount { get; set; }
+        public decimal Amount { get; set; }
         public string Year { get; set; }
         public string Bic { get; set; }
         public string AccountNumber { get; set; }

@@ -28,7 +28,7 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
             /// </param>
             /// <param name='assetId'>
             /// </param>
-            public static void ApiEmailRequestPost(this ISwiftCredentialsAPI operations, double amount, string clientId = default(string), string regulationId = default(string), string assetId = default(string))
+            public static void ApiEmailRequestPost(this ISwiftCredentialsAPI operations, decimal amount, string clientId = default(string), string regulationId = default(string), string assetId = default(string))
             {
                 operations.ApiEmailRequestPostAsync(amount, clientId, regulationId, assetId).GetAwaiter().GetResult();
             }
@@ -47,7 +47,7 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task ApiEmailRequestPostAsync(this ISwiftCredentialsAPI operations, double amount, string clientId = default(string), string regulationId = default(string), string assetId = default(string), CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task ApiEmailRequestPostAsync(this ISwiftCredentialsAPI operations, decimal amount, string clientId = default(string), string regulationId = default(string), string assetId = default(string), CancellationToken cancellationToken = default(CancellationToken))
             {
                 (await operations.ApiEmailRequestPostWithHttpMessagesAsync(amount, clientId, regulationId, assetId, null, cancellationToken).ConfigureAwait(false)).Dispose();
             }
