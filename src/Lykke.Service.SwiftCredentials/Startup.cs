@@ -17,6 +17,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging.Console.Internal;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Lykke.Service.SwiftCredentials
@@ -81,6 +82,8 @@ namespace Lykke.Service.SwiftCredentials
 
                 builder.RegisterModule(new Services.AutofacModule());
                 builder.RegisterModule(new AzureRepositories.AutofacModule(appSettings.Nested(x => x.SwiftCredentialsService.Db.DataConnectionString), Log));
+                builder.RegisterModule(new ClientsModule(appSettings.CurrentValue, Log));
+                builder.RegisterModule(new CqrsModule(appSettings.CurrentValue, Log));
                 builder.Populate(services);
                 ApplicationContainer = builder.Build();
 
