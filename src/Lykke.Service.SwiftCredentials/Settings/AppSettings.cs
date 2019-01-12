@@ -1,4 +1,4 @@
-﻿using Lykke.Service.Assets.Client;
+﻿using Lykke.Service.ClientAccount.Client;
 using Lykke.Service.PersonalData.Settings;
 using Lykke.Service.SwiftCredentials.Settings.ServiceSettings;
 using Lykke.Service.SwiftCredentials.Settings.SlackNotifications;
@@ -13,6 +13,7 @@ namespace Lykke.Service.SwiftCredentials.Settings
         public PersonalDataServiceClientSettings PersonalDataServiceClient { get; set; }
         public AssetsSettings AssetsServiceClient { get; set; }
         public SlackNotificationsSettings SlackNotifications { get; set; }
+        public ClientAccountServiceClientSettings ClientAccountServiceClient { get; set; }
     }
     
     public class SagasRabbitMq
