@@ -5,6 +5,7 @@ using Autofac.Extensions.DependencyInjection;
 using AutoMapper;
 using AzureStorage.Tables;
 using Common.Log;
+using Lykke.Common;
 using Lykke.Common.ApiLibrary.Middleware;
 using Lykke.Common.ApiLibrary.Swagger;
 using Lykke.Logs;
@@ -17,7 +18,6 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging.Console.Internal;
 using Swashbuckle.AspNetCore.Swagger;
 
 namespace Lykke.Service.SwiftCredentials
@@ -85,7 +85,12 @@ namespace Lykke.Service.SwiftCredentials
                 Mapper.AssertConfigurationIsValid();
 
                 var builder = new ContainerBuilder();
-                var appSettings = Configuration.LoadSettings<AppSettings>();
+                var appSettings = Configuration.LoadSettings<AppSettings>(options =>
+                {
+                    options.SenderName = $"{AppEnvironment.Name} {AppEnvironment.Version}";
+                    options.SetConnString(x => x.SlackNotifications.AzureQueue.ConnectionString);
+                    options.SetQueueName(x => x.SlackNotifications.AzureQueue.QueueName);
+                });
                 Log = CreateLogWithSlack(services, appSettings);
 
                 builder.RegisterInstance(Log)

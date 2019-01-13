@@ -3,7 +3,7 @@ using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Common.Log;
 using Lykke.Service.Assets.Client;
-using Lykke.Service.PersonalData;
+using Lykke.Service.ClientAccount.Client;
 using Lykke.Service.PersonalData.Client;
 using Lykke.Service.PersonalData.Contract;
 using Lykke.Service.SwiftCredentials.Settings;
@@ -38,6 +38,8 @@ namespace Lykke.Service.SwiftCredentials
             builder.RegisterType<PersonalDataService>()
                 .As<IPersonalDataService>()
                 .WithParameter(TypedParameter.From(_settings.PersonalDataServiceClient));
+            
+            builder.RegisterLykkeServiceClient(_settings.ClientAccountServiceClient.ServiceUrl);
             
             builder.Populate(_services);
         }
