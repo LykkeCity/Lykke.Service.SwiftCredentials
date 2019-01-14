@@ -28,16 +28,7 @@ namespace Lykke.Service.SwiftCredentials.Services
             
             var assetTitle = asset.DisplayId ?? assetId;
             
-            var clientIdentity = string.IsNullOrEmpty(client.ExternalId) ? "{1}" : client.ExternalId;
-            var purposeOfPayment = string.Format(template, assetTitle, clientIdentity);
-
-            if (!purposeOfPayment.Contains(assetId) && !purposeOfPayment.Contains(assetTitle))
-                purposeOfPayment += assetTitle;
-
-            if (!purposeOfPayment.Contains(clientIdentity))
-                purposeOfPayment += clientIdentity;
-
-            return purposeOfPayment;
+            return string.Format(template, assetTitle, client.ExternalId);
         }
     }
 }
