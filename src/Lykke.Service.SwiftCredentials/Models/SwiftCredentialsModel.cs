@@ -15,5 +15,6 @@ namespace Lykke.Service.SwiftCredentials.Models
         public string BankAddress { get; set; }
         public string CompanyAddress { get; set; }
         public string CorrespondentAccount { get; set; }
+        public string WithdrawalMessage { get; set; }
     }
 }
