@@ -23,7 +23,7 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient.Models
         /// <summary>
         /// Initializes a new instance of the SwiftCredentialsModel class.
         /// </summary>
-        public SwiftCredentialsModel(string regulatorId, string assetId, string bic = default(string), string accountNumber = default(string), string accountName = default(string), string purposeOfPayment = default(string), string bankAddress = default(string), string companyAddress = default(string), string correspondentAccount = default(string))
+        public SwiftCredentialsModel(string regulatorId, string assetId, string bic = default(string), string accountNumber = default(string), string accountName = default(string), string purposeOfPayment = default(string), string bankAddress = default(string), string companyAddress = default(string), string correspondentAccount = default(string), string withdrawalMessage = default(string))
         {
             RegulatorId = regulatorId;
             AssetId = assetId;
@@ -34,6 +34,7 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient.Models
             BankAddress = bankAddress;
             CompanyAddress = companyAddress;
             CorrespondentAccount = correspondentAccount;
+            WithdrawalMessage = withdrawalMessage;
             CustomInit();
         }
 
@@ -86,6 +87,11 @@ namespace Lykke.Service.SwiftCredentials.Client.AutorestClient.Models
         /// </summary>
         [JsonProperty(PropertyName = "CorrespondentAccount")]
         public string CorrespondentAccount { get; set; }
+
+        /// <summary>
+        /// </summary>
+        [JsonProperty(PropertyName = "WithdrawalMessage")]
+        public string WithdrawalMessage { get; set; }
 
         /// <summary>
         /// Validate the object.
