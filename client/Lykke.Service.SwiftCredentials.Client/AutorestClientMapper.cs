@@ -14,7 +14,8 @@
                 PurposeOfPayment = model.PurposeOfPayment,
                 BankAddress = model.BankAddress,
                 CompanyAddress = model.CompanyAddress,
-                CorrespondentAccount = model.CorrespondentAccount
+                CorrespondentAccount = model.CorrespondentAccount,
+                WithdrawalMessage = model.WithdrawalMessage
             };
         }
 
@@ -30,7 +31,8 @@
                 PurposeOfPayment = model.PurposeOfPayment,
                 BankAddress = model.BankAddress,
                 CompanyAddress = model.CompanyAddress,
-                CorrespondentAccount = model.CorrespondentAccount
+                CorrespondentAccount = model.CorrespondentAccount,
+                WithdrawalMessage = model.WithdrawalMessage
             };
         }
     }

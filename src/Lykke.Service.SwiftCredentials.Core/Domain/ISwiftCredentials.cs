@@ -11,5 +11,6 @@
         string BankAddress { get; set; }
         string CompanyAddress { get; set; }
         string CorrespondentAccount { get; set; }
+        string WithdrawalMessage { get; set; }
     }
 }
